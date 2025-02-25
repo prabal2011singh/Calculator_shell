@@ -5,7 +5,7 @@ pipeline {
    }
    //setting up the variables
     environment {
-        DOCKER_IMAGE_NAME = 'calculator_trial'
+        DOCKER_IMAGE_NAME = 'calculator_trail'
         GITHUB_REPO_URL = 'https://github.com/prabal2011singh/Calculator_shell.git'
     }
 
