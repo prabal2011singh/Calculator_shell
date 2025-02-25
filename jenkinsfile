@@ -3,12 +3,15 @@ pipeline {
     triggers { 
       githubPush() 
    }
+   //setting up the variables
     environment {
-        DOCKER_IMAGE_NAME = 'calculator'
-        GITHUB_REPO_URL = 'https://github.com/prabal2011singh/calculator.git'
+        DOCKER_IMAGE_NAME = 'calculator_trial'
+        GITHUB_REPO_URL = 'https://github.com/prabal2011singh/Calculator_shell.git'
     }
 
+
     stages {
+        //cloning the git repo
         stage('Checkout') {
             steps {
                 script {
@@ -30,9 +33,9 @@ pipeline {
         stage('Push Docker Images') {
             steps {
                 script{
-                    docker.withRegistry('', 'DockerHubCred') {
-                    sh 'docker tag calculator iiitb/calculator:latest'
-                    sh 'docker push iiitb/calculator'
+                    docker.withRegistry('', 'DockerHubCredentials') {
+                    sh 'docker tag calculator calculator_trail:latest'
+                    sh 'docker push calculator_trail'
                     }
                  }
             }
@@ -53,12 +56,12 @@ pipeline {
 }
  post {
         success {
-            mail to: 'b.thangaraju@iiitb.ac.in',
+            mail to: 'prabal.singh@iiitb.ac.in',
                  subject: "Application Deployment SUCCESS: Build ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                  body: "The build was successful!"
         }
         failure {
-            mail to: 'b.thangaraju@iiitb.ac.in',
+            mail to: 'prabal.singh@iiitb.ac.in',
                  subject: "Application Deployment FAILURE: Build ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                  body: "The build failed."
         }
