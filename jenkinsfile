@@ -35,7 +35,7 @@ pipeline {
                 script{
                     docker.withRegistry('', 'DockerHubCredentials') {
                     sh 'docker tag calculator calculator_trail:latest'
-                    sh 'docker push calculator_trail'
+                    sh 'docker push prabal2011singh/calculator_trail'
                     }
                  }
             }
